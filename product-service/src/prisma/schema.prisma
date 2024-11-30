@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model orders {
+  orders_id  Int      @id @default(autoincrement())
+  product_id Int?
+  user_id    Int?
+  product    product? @relation(fields: [product_id], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "orders_ibfk_1")
+  users      users?   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "orders_ibfk_2")
+
+  @@index([product_id], map: "product_id")
+  @@index([user_id], map: "user_id")
+}
+
+model product {
+  product_id   Int      @id @default(autoincrement())
+  product_name String   @db.VarChar(100)
+  price        Decimal  @db.Decimal(10, 2)
+  color_image  String?  @db.VarChar(255)
+  size         String?  @db.VarChar(10)
+  description  String?  @db.Text
+  orders       orders[]
+}
+
+model shipping {
+  ship_id    Int     @id @default(autoincrement())
+  email      String  @db.VarChar(100)
+  first_name String  @db.VarChar(50)
+  last_name  String  @db.VarChar(50)
+  phone      String? @db.VarChar(20)
+  address    String? @db.Text
+}
+
+model users {
+  user_id   Int      @id @default(autoincrement())
+  full_name String   @db.VarChar(100)
+  email     String   @unique(map: "email") @db.VarChar(100)
+  password  String   @db.VarChar(255)
+  orders    orders[]
+}
