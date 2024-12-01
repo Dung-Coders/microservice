@@ -6,7 +6,8 @@ import { ClientProxy } from '@nestjs/microservices';
 @Injectable()
 export class AppService {
   constructor(private readonly prismaService: PrismaService,
-    @Inject("SHIPPING_NAME") private notifyService: ClientProxy
+    @Inject("SHIPPING_NAME") private shippingService: ClientProxy,
+    @Inject("NOTIFY_NAME") private notifyService: ClientProxy
   ){}
 
   async getProduct(){

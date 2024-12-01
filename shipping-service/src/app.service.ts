@@ -1,10 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma/prisma.service';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly prismaService:PrismaService){}
-
+  constructor(private readonly prismaService:PrismaService,
+    @Inject("NOTIFY_NAME") private notifyService: ClientProxy
+  ){}
+  
   async shipping(data){
     let {order_id, email, full_name, phone, address} = data;
 
@@ -12,6 +15,8 @@ export class AppService {
       data:{order_id, email, full_name, phone, address}
     })
   
+    this.notifyService.emit("success_order",email);
+    
     return shipping_data;
   }
 }

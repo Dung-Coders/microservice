@@ -1,13 +1,17 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { AppService } from './app.service';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { EventPattern, Payload } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @MessagePattern("get_product")
-  getProduct(@Payload() data){
-    return this.appService.getProduct();
+  @EventPattern("confirm_order")
+  sendMailConfirm(@Payload() data){
+    return this.appService.sendMailConfirm(data);
+  }
+  @EventPattern("success_order")
+  sendMailSuccess(@Payload() data){
+    return this.appService.sendMailSuccess(data);
   }
 }

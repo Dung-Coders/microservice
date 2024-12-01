@@ -18,7 +18,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       }
     },
     {
-      name:"NOTIFY_NAME",
+      name:"SHIPPING_NAME",
       transport: Transport.RMQ,
       options:{
         urls:["amqp://admin:1234@localhost:5672"],
@@ -30,7 +30,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       }
     },
     {
-      name:"SHIPPIN_NAME",
+      name:"NOTIFY_NAME",
       transport: Transport.RMQ,
       options:{
         urls:["amqp://admin:1234@localhost:5672"],
