@@ -8,6 +8,13 @@ export class AppController {
 
   @MessagePattern("get_product")
   getProduct(@Payload() data){
+    
     return this.appService.getProduct();
+  }
+
+  @MessagePattern("shipping_product")
+  orders(@Payload() data){
+
+    return this.appService.orders(data);
   }
 }

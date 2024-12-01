@@ -8,7 +8,6 @@ export class AppController {
 
   @MessagePattern("get_product")
   getProduct(@Payload() data){
-    // console.log(data);
     return this.appService.getProduct();
   }
 }

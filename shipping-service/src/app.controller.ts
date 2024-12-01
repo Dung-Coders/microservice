@@ -6,9 +6,9 @@ import { MessagePattern, Payload } from '@nestjs/microservices';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @MessagePattern("get_product")
-  getProduct(@Payload() data){
-    // console.log(data);
-    return this.appService.getProduct();
+  @MessagePattern("shipping_product")
+  shipping(@Payload() data){
+    
+    return this.appService.shipping(data);
   }
 }

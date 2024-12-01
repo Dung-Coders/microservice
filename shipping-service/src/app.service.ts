@@ -1,11 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaMysqlService } from './prisma/prisma.service';
+import { PrismaService } from './prisma/prisma.service';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly prismaService:PrismaMysqlService){}
+  constructor(private readonly prismaService:PrismaService){}
 
-  async getProduct(){
-    return await this.prismaService.products.findMany();
+  async shipping(data){
+    let {order_id, email, full_name, phone, address} = data;
+
+    let shipping_data = await this.prismaService.shipping.create({
+      data:{order_id, email, full_name, phone, address}
+    })
+  
+    return shipping_data;
   }
 }

@@ -28,3 +28,6 @@ bootstrap();
 //yarn add @nestjs/config
 
 //yarn add @nestjs/microservices amqplib amqp-connection-manager
+
+//yarn prisma db pull --schema ./src/prisma/schema.prisma
+//yarn prisma generate --schema ./src/prisma/schema.prisma

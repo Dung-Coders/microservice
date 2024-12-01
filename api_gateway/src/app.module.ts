@@ -16,7 +16,32 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         },
         persistent:true //keep message
       }
-    }])
+    },
+    {
+      name:"NOTIFY_NAME",
+      transport: Transport.RMQ,
+      options:{
+        urls:["amqp://admin:1234@localhost:5672"],
+        queue:"notify_queue",
+        queueOptions:{
+          durable:true //keep queue when RabbitMQ restarts
+        },
+        persistent:true //keep message
+      }
+    },
+    {
+      name:"SHIPPIN_NAME",
+      transport: Transport.RMQ,
+      options:{
+        urls:["amqp://admin:1234@localhost:5672"],
+        queue:"shipping_queue",
+        queueOptions:{
+          durable:true //keep queue when RabbitMQ restarts
+        },
+        persistent:true //keep message
+      }
+    }
+  ])
   ],
   controllers: [AppController],
   providers: [AppService],
