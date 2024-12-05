@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  api-gateway:
+    container_name: api_gateway
+    build: ./api_gateway # build bằng Dockerfile
+    # image:  # build bằng hub docker
+    ports:
+      - 8080:8080
+    networks:
+      - node-network
+
+  notify-service:
+    container_name: notify-service
+    build: ./notify-service  
+    networks:
+      - node-network
+
+  order-service:
+    container_name: product-service
+    build: ./product-service  
+    environment:
+      - DATABASE_URL=mysql://root:12345@some-mysql:3306/amazon_db
+      - REDIS_HOST=some-redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=1234
+      - REDIS_TTL=600
+    networks:
+      - node-network
+
+  shipping-service:
+    container_name: shipping-service
+    build: ./shipping-service  
+    networks:
+      - node-network
+  
+networks:
+  node-network:
+    external: true
+      

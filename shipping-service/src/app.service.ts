@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { PrismaService } from './prisma/prisma.service';
 import { ClientProxy } from '@nestjs/microservices';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly prismaService:PrismaService,
+  constructor(private readonly prismaService:PrismaClient,
     @Inject("NOTIFY_NAME") private notifyService: ClientProxy
   ){}
   

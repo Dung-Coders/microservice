@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from './prisma/prisma.service';
 import * as nodemailer from 'nodemailer';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly prismaService: PrismaService){}
 
   sendMailConfirm(data){
     //sending mail to user
